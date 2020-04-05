@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pdfviewer/pdf.dart';
@@ -10,6 +9,7 @@ String pdfurl;
 
 void main() => runApp(
   MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: home(),
   )
 );
@@ -23,7 +23,7 @@ class _homeState extends State<home> {
 
   Future getpdfs()async{
     pdflist=[];
-     qn=await Firestore.instance.collection("pdf").getDocuments();
+    qn=await Firestore.instance.collection("pdf").getDocuments();
     pdflist=qn.documents;
     print(pdflist.length);
   }
@@ -39,7 +39,7 @@ class _homeState extends State<home> {
           builder: (_,qn){
             if(qn.connectionState==ConnectionState.waiting)
             {
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }
             else{
               return ListView.builder(
@@ -72,5 +72,3 @@ class _homeState extends State<home> {
       );
   }
 }
-
-
